@@ -1,0 +1,13 @@
+package com.tanzu;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TestotesterConsumerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(TestotesterConsumerApplication.class, args);
+	}
+
+}
