@@ -1,9 +1,9 @@
-#Testo Tester
+# Testo Tester
 A troubleshooting swiss-army knife application
 
 ---
 
-##Installation
+## Installation
 If you download the project, each microservice can be ran locally in the IDE or with the following command:
 ```
 ./mvnw clean spring-boot:run
