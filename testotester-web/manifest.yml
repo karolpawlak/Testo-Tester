@@ -1,0 +1,11 @@
+---
+applications:
+  - name: tt-web
+    memory: 1G
+    instances: 1
+    buildpacks: [java_buildpack_offline]
+    path: target/testotester-web-0.0.1-SNAPSHOT.jar
+    env:
+      LOGGING_LEVEL_ROOT: INFO
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
+      SERVER_URL: https://tt-server.cfapps-39.slot-59.pez.vmware.com

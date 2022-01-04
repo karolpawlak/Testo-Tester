@@ -1,0 +1,40 @@
+---
+spring:
+  config:
+    activate:
+      on-profile: in-memory
+  datasource:
+    url:
+    username:
+    password:
+    driverClassName:
+---
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  datasource:
+    url:
+    username:
+    password:
+    driverClassName:
+---
+spring:
+  config:
+    activate:
+      on-profile: postgres
+  datasource:
+    url:
+    username:
+    password:
+    driverClassName:
+---
+spring:
+  config:
+    activate:
+      on-profile: redis
+  datasource:
+    url:
+    username:
+    password:
+    driverClassName:
