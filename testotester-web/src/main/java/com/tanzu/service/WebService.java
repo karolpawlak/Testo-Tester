@@ -10,6 +10,7 @@ public class WebService {
     @Autowired
     RestTemplate restTemplate;
 
+    // server url - load env variable or use localhost as default
     @Value("${SERVER_URL:http://localhost:8089}")
     private String serverUrl;
 

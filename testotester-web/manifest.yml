@@ -8,4 +8,4 @@ applications:
     env:
       LOGGING_LEVEL_ROOT: INFO
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
-      SERVER_URL: https://tt-server.cfapps-39.slot-59.pez.vmware.com
+      SERVER_URL: https://tt-server.cfapps-07.slot-50.pez.vmware.com
