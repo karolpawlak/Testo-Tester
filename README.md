@@ -39,3 +39,32 @@ Prerequisites:
 
 Using the `cf push` command, the application will be pushed using settings in the provided `manifest.yml` file. The output from the command will show the URL that has been assigned to the application.
 
+## Actuator
+Each microservice contains an Actuator dependency that enables production-grade tools for exposing operational information about the running application such as monitoring the app, gathering metrics, understanding traffic and examining the status of database connectivity. It uses HTTP endpoint interact with it.
+
+[More information about the Actuator API can be found in the official documentation](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Spring Boot enables a discovery endpoint that returns all available Actuator endpoints as hypermedia. 
+
+The URLs are in a form of `/actuator/{id}` where `id` is one of the endpoints listed below eg. `/actuator/info`
+List of all available Actuator endpoints:
+* `/auditevents` lists security audit-related events. Requires an *AuditEventRepository* bean.
+* `/beans` returns all available Spring beans in our *BeanFactory*.
+* `/caches` returns available caches.
+* `/conditions` builds a report of conditions that were evaluated on configuration and auto-configuration classes.
+* `/configprops` allows us to fetch all *@ConfigurationProperties* beans.
+* `/env` returns the current environment properties from Spring's *ConfigurableEnvironment*. Additionally, we can retrieve single properties.
+* `/flyway` provides details about our *Flyway* database migrations. Requires one or more *Flyway* beans.
+* `/health` shows application health information.
+* `/heapdump` builds and returns a heap dump from the JVM used by the application.
+* `/httptrace` displays HTTP trace information (by default, the last 100 HTTP request-response exchanges). Requires an *HttpTraceRepository* bean.
+* `/info` returns general information.
+* `/integrationgraph` shows the Spring Integration graph. Requires a dependency on *spring-integration-core*.
+* `/liquibase` provides details about our *Liquibase* database migrations. Requires one or more *Liquibase* beans.
+* `/loggers` shows and modifies the configuration of loggers in the application.
+* `/metrics` shows which application metrics information are available.
+* `/mappings` displays a collated list of all *@RequestMapping* paths.
+* `/quartz` shows information about Quartz Scheduler jobs.
+* `/scheduledtasks` provides details about every scheduled task within the application.
+* `/sessions allows` retrieval and deletion of user sessions from a Spring Session-backed session store. Requires a servlet-based web application that uses *Spring Session*.
+* `/shutdown` performs a graceful shutdown of the application. Disabled by default.
+* `/startup` shows the startup steps data collected by the *ApplicationStartup*. Requires the *@SpringApplication* to be configured with a *BufferingApplicationStartup*.
+* `/threaddump` dumps the thread information of the underlying JVM.
