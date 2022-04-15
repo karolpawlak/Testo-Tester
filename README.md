@@ -42,7 +42,7 @@ Using the `cf push` command, the application will be pushed using settings in th
 ## Actuator
 Each microservice contains an Actuator dependency that enables production-grade tools for exposing operational information about the running application such as monitoring the app, gathering metrics, understanding traffic and examining the status of database connectivity. It uses HTTP endpoint interact with it.
 
-[More information about the Actuator API can be found in the official documentation](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Spring Boot enables a discovery endpoint that returns all available Actuator endpoints as hypermedia. 
+[More information about the Actuator API can be found in the official documentation](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Spring Boot enables a discovery endpoint `/actuator/` that returns all available Actuator endpoints as hypermedia. 
 
 The URLs are in a form of `/actuator/{id}` where `id` is one of the endpoints listed below eg. `/actuator/info`
 List of all available Actuator endpoints:
