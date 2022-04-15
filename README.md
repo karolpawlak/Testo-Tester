@@ -4,7 +4,7 @@ A troubleshooting swiss-army knife application
 ---
 
 ## Installation
-If you download the project, each microservice can be ran locally in the IDE or with the following command:
+The microservices in this project are written in Java with Spring Boot. If you download the project, each microservice can be ran locally in the IDE or with the following command:
 ```
 ./mvnw clean spring-boot:run
 ```
@@ -23,21 +23,11 @@ More information on Maven's application build lifecycle [here](https://maven.apa
 
 Note. If you have Maven CLI installed on your local machine, the `./mvnw` can be substituted for `mvn`.
 
-## Selecting a profile
-A Spring profile should be activated to choose the database provider that the application should use. The profile is selected by setting the system property `spring.profiles.active` when starting the app. By default, the application will start with `in-memory` profile. 
-
-This property can be set programatically in the `application.properties` file or specified in Cloud Foundry deployment manifest `manifest.yml` in the format `spring.profiles.active=<PROFILE>` where `<PROFILE>` is one of the following available profiles:
-
-* `in-memory` (no external database required)
-* `mysql`
-* `postgres`
-* `redis`
-
 ## Cloud Foundry deployment
 Prerequisites:
 * [Command-Line Interface for Cloud Foundry](http://docs.cloudfoundry.org/cf-cli/)
 
-Using the `cf push` command, the application will be pushed using settings in the provided `manifest.yml` file. The output from the command will show the URL that has been assigned to the application.
+Using the `cf push` command, each microservice can be pushed using settings in the provided `manifest.yml` file. The output from the command will show the URL that has been assigned to the application.
 
 ## Actuator
 Each microservice contains an Actuator dependency that enables production-grade tools for exposing operational information about the running application such as monitoring the app, gathering metrics, understanding traffic and examining the status of database connectivity. It uses HTTP endpoint interact with it.
@@ -68,3 +58,29 @@ List of all available Actuator endpoints:
 * `/shutdown` performs a graceful shutdown of the application. Disabled by default.
 * `/startup` shows the startup steps data collected by the *ApplicationStartup*. Requires the *@SpringApplication* to be configured with a *BufferingApplicationStartup*.
 * `/threaddump` dumps the thread information of the underlying JVM.
+
+## Eureka Server
+
+Eureka server enables service registry to allow client-side service discovery between the microservices. This allows the services to find and communicate with each other without hard-coding the hostname and port. Eureka server provides a fixed point in this architecture as a service registry, with which each service has to register. The Eureka server provides a dashboard available at `http://localhost:8761` that allows to inspect the registered service instances.
+
+## Web
+
+Specific information regarding the Web microservice.
+
+## Server
+
+Specific information regarding the Server microservice.
+
+### Selecting a profile
+A Spring profile should be activated to choose the database provider that the application should use. The profile is selected by setting the system property `spring.profiles.active` when starting the app. By default, the application will start with `in-memory` profile. 
+
+This property can be set programatically in the `application.properties` file or specified in Cloud Foundry deployment manifest `manifest.yml` in the format `spring.profiles.active=<PROFILE>` where `<PROFILE>` is one of the following available profiles:
+
+* `in-memory` (no external database required)
+* `mysql`
+* `postgres`
+* `redis`
+
+## Client
+
+Specific information regarding the Client microservice.
