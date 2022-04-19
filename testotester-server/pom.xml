@@ -12,7 +12,7 @@
 	<artifactId>testotester-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>testotester-server</name>
-	<description>Back-end testing application</description>
+	<description>Back-end Testotester application</description>
 
 	<properties>
 		<java.version>17</java.version>
@@ -26,14 +26,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
 		</dependency>
 
 		<dependency>
@@ -41,6 +41,7 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 	</dependencies>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

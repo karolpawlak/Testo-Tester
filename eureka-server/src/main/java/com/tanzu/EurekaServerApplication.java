@@ -1,4 +1,4 @@
-package com.tanzu.eurekaserver;
+package com.tanzu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
