@@ -8,8 +8,7 @@ The microservices in this project are written in Java with Spring Boot. If you d
 ```
 ./mvnw clean spring-boot:run
 ```
-
-In order to deploy the app in the cloud, the code must be compiled and packaged to a JAR file using Maven wrapper:
+In order to deploy the app in the cloud, the code must be compiled and packaged to a JAR file using Maven wrapper. To skip tests during the packaging, add `-DskipTests` flag to compile the tests without running them or `-Dmaven.test.skip` to not compile the tests at all.:
 ```
 ./mvnw clean package
 ```
@@ -44,6 +43,7 @@ List of all available Actuator endpoints:
 * `/env` returns the current environment properties from Spring's *ConfigurableEnvironment*. Additionally, we can retrieve single properties.
 * `/flyway` provides details about our *Flyway* database migrations. Requires one or more *Flyway* beans.
 * `/health` shows application health information.
+* `/health/disk` shows application disk usage information.
 * `/heapdump` builds and returns a heap dump from the JVM used by the application.
 * `/httptrace` displays HTTP trace information (by default, the last 100 HTTP request-response exchanges). Requires an *HttpTraceRepository* bean.
 * `/info` returns general information.

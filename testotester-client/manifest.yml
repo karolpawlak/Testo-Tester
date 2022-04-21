@@ -1,0 +1,12 @@
+---
+applications:
+  - name: tt-client
+    memory: 1G
+    instances: 1
+    buildpacks: [java_buildpack_offline]
+    path: target/testotester-client-0.0.1-SNAPSHOT.jar
+    services:
+      - my-service-registry
+    env:
+      LOGGING_LEVEL_ROOT: INFO
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
