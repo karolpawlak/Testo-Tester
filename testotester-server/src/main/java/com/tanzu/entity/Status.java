@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class Status {
-    private String[] activeProfiles;
+    private String[] activeProfile;
     private Mode serverMode = Mode.UNKNOWN;
     private Mode clientMode = Mode.UNKNOWN;
 

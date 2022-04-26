@@ -2,12 +2,14 @@ package com.tanzu.service;
 
 import com.tanzu.entity.Mode;
 import com.tanzu.entity.Status;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @Service
 public class ServerService {
 
@@ -25,7 +27,7 @@ public class ServerService {
 
     public Status check(){
         status.setServerMode(Mode.ONLINE);
-        status.setActiveProfiles(env.getActiveProfiles());
+        status.setActiveProfile(env.getActiveProfiles());
 
         try{
             status.setClientMode(checkClient());
@@ -34,8 +36,12 @@ public class ServerService {
             status.setClientMode(Mode.UNKNOWN);
 
             // log that
-            System.out.println(e);
+            log.error("Connection to the client failed with the following:", e);
         }
+
+        // log this
+        log.info("Check completed with the result - Profile: " + status.getActiveProfile()[0]
+                + " Server mode: " + status.getServerMode().toString() + " Client mode: " + status.getClientMode().toString());
 
         return status;
     }

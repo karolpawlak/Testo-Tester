@@ -9,3 +9,4 @@ applications:
       LOGGING_LEVEL_ROOT: INFO
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
       #JAVA_OPTS: -Dspring.profiles.active=mysql
+      CLIENT_URL: https://tt-client.cfapps-06.slot-50.pez.vmware.com

@@ -15,9 +15,4 @@ public class ServerController {
     public Status get(){
         return service.check();
     }
-
-//    @GetMapping("/client")
-//    public String getClient(){
-//        return service.checkClient();
-//    }
 }
