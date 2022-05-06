@@ -26,9 +26,11 @@ public class ServerService {
     private String clientUrl;
 
     public Status check(){
+        // put server status data
         status.setServerMode(Mode.ONLINE);
         status.setActiveProfile(env.getActiveProfiles());
 
+        // put client status data
         try{
             status.setClientMode(checkClient());
         }
@@ -36,7 +38,7 @@ public class ServerService {
             status.setClientMode(Mode.UNKNOWN);
 
             // log that
-            log.error("Connection to the client failed with the following:", e);
+            log.warn("Liveness probe failed to the client with url " + clientUrl + " with the following exception:", e);
         }
 
         // log this
@@ -48,8 +50,6 @@ public class ServerService {
 
     public Mode checkClient()
     {
-        Mode response = restTemplate.getForObject(clientUrl, Mode.class);
-        System.out.println(response);
-        return response;
+        return restTemplate.getForObject(clientUrl, Mode.class);
     }
 }
