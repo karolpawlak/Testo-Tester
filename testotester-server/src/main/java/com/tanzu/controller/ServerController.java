@@ -15,4 +15,9 @@ public class ServerController {
     public Status get(){
         return service.check();
     }
+
+    @GetMapping("/generate-npc")
+    public String generateNpc(){
+        return service.createNpc();
+    }
 }

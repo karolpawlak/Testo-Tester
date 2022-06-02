@@ -14,10 +14,17 @@ spring:
     activate:
       on-profile: mysql
   datasource:
-    url:
-    username:
-    password:
-    driverClassName:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/testotester_db
+    username: ${MYSQL_USER:springuser}
+    password: ${MYSQL_PASSWORD:thepassword}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
 ---
 spring:
   config:
