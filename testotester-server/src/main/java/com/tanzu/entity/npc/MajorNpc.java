@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +27,7 @@ public class MajorNpc extends Npc {
     private List<String> equipment;
 
     public MajorNpc(String first_name, String last_name, String gender, String race, String profession){
-        super.first_name = first_name;
-        super.last_name = last_name;
-        super.gender = gender;
-        super.race = race;
-        super.profession = profession;
+        super(first_name, last_name, gender, race, profession);
         this.allies = new ArrayList<>();
         this.enemies = new ArrayList<>();
         this.equipment = new ArrayList<>();
@@ -42,6 +36,14 @@ public class MajorNpc extends Npc {
 
     public void addEquipmentItem(String item){
         equipment.add(item);
+    }
+
+    public void addAlly(String ally){
+        allies.add(ally);
+    }
+
+    public void addEnemy(String enemy){
+        enemies.add(enemy);
     }
 
 }

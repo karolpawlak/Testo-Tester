@@ -18,6 +18,11 @@ public class ServerController {
 
     @GetMapping("/generate-npc")
     public String generateNpc(){
-        return service.createNpc();
+        return service.createNpc("Toblen", "Stonehill", "Male", "Human", "Merchant");
+    }
+
+    @GetMapping("/generate-major-npc")
+    public String generateMajorNpc(){
+        return service.createMajorNpc("Brolly", "Mountainheim", "Male", "Dwarf", "Barbarian");
     }
 }

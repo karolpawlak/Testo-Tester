@@ -4,6 +4,7 @@ import com.tanzu.entity.Mode;
 import com.tanzu.entity.Status;
 import com.tanzu.entity.npc.MajorNpc;
 import com.tanzu.entity.npc.Npc;
+import com.tanzu.factory.MonsterFactory;
 import com.tanzu.repository.NpcRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ServerService {
 
     @Autowired
     private NpcRepository npcRepo;
+
+    @Autowired
+    private MonsterFactory npcFactory;
 
     @Value("${CLIENT_URL:http://localhost:8081}")
     private String clientUrl;
@@ -60,20 +64,27 @@ public class ServerService {
         return restTemplate.getForObject(clientUrl, Mode.class);
     }
 
-    public String createNpc()
+    public String createNpc(String first_name, String last_name, String gender, String race, String profession)
     {
-        Npc new_npc = new Npc("Toblen", "Stonehill", "Male", "Human", "Merchant");
-        MajorNpc new_majornpc = new MajorNpc("Brolly", "Mountainheim", "Male", "Dwarf", "Barbarian");
+        Npc new_npc = new Npc(first_name, last_name, gender, race, profession);
+
+        npcRepo.save(new_npc);
+
+        return "Created NPC";
+    }
+
+    public String createMajorNpc(String first_name, String last_name, String gender, String race, String profession)
+    {
+        MajorNpc new_major_npc = new MajorNpc(first_name, last_name, gender, race, profession);
 
         String weapon = "Greataxe";
         String armor = "Leather armor";
 
-        new_majornpc.addEquipmentItem(weapon);
-        new_majornpc.addEquipmentItem(armor);
+        new_major_npc.addEquipmentItem(weapon);
+        new_major_npc.addEquipmentItem(armor);
 
-        npcRepo.save(new_npc);
-        npcRepo.save(new_majornpc);
+        npcRepo.save(new_major_npc);
 
-        return "Created";
+        return "Created Major NPC";
     }
 }
