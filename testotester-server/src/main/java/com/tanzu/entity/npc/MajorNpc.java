@@ -1,5 +1,7 @@
 package com.tanzu.entity.npc;
 
+import com.tanzu.entity.Alignment;
+import com.tanzu.entity.race.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class MajorNpc extends Npc {
+public class MajorNpc extends Npc implements Dwarf, Elf, Gnome, Halfling, Human {
 
-    private String alignment;
+    // Abilities
+    private int strength;
+    private int dexterity;
+    private int constitution;
+    private int intelligence;
+    private int wisdom;
+    private int charisma;
+
+    private Alignment alignment;
 
     @ElementCollection
     private List<String> allies;
@@ -23,19 +33,33 @@ public class MajorNpc extends Npc {
     @ElementCollection
     private List<String> enemies;
 
-    @ElementCollection
-    private List<String> equipment;
-
     public MajorNpc(String first_name, String last_name, String gender, String race, String profession){
         super(first_name, last_name, gender, race, profession);
         this.allies = new ArrayList<>();
         this.enemies = new ArrayList<>();
-        this.equipment = new ArrayList<>();
-
     }
 
-    public void addEquipmentItem(String item){
-        equipment.add(item);
+    @Override
+    public void show(){
+        switch (super.race.toLowerCase()) {
+            case "dwarf":
+                Dwarf.super.show();
+                break;
+            case "elf":
+                Elf.super.show();
+                break;
+            case "gnome":
+                Gnome.super.show();
+                break;
+            case "halfling":
+                Halfling.super.show();
+                break;
+            case "human":
+                Human.super.show();
+                break;
+            default:
+                throw new IllegalArgumentException("No such race.");
+        }
     }
 
     public void addAlly(String ally){

@@ -1,5 +1,6 @@
 package com.tanzu.service;
 
+import com.tanzu.entity.Alignment;
 import com.tanzu.entity.Mode;
 import com.tanzu.entity.Status;
 import com.tanzu.entity.npc.MajorNpc;
@@ -76,12 +77,8 @@ public class ServerService {
     public String createMajorNpc(String first_name, String last_name, String gender, String race, String profession)
     {
         MajorNpc new_major_npc = new MajorNpc(first_name, last_name, gender, race, profession);
-
-        String weapon = "Greataxe";
-        String armor = "Leather armor";
-
-        new_major_npc.addEquipmentItem(weapon);
-        new_major_npc.addEquipmentItem(armor);
+        new_major_npc.show();
+        new_major_npc.setAlignment(Alignment.LAWFUL_GOOD);
 
         npcRepo.save(new_major_npc);
 
