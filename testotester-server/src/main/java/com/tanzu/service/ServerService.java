@@ -27,12 +27,6 @@ public class ServerService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    private NpcRepository npcRepo;
-
-    @Autowired
-    private MonsterFactory npcFactory;
-
     @Value("${CLIENT_URL:http://localhost:8081}")
     private String clientUrl;
 
@@ -65,23 +59,5 @@ public class ServerService {
         return restTemplate.getForObject(clientUrl, Mode.class);
     }
 
-    public String createNpc(String first_name, String last_name, String gender, String race, String profession)
-    {
-        Npc new_npc = new Npc(first_name, last_name, gender, race, profession);
 
-        npcRepo.save(new_npc);
-
-        return "Created NPC";
-    }
-
-    public String createMajorNpc(String first_name, String last_name, String gender, String race, String profession)
-    {
-        MajorNpc new_major_npc = new MajorNpc(first_name, last_name, gender, race, profession);
-        new_major_npc.show();
-        new_major_npc.setAlignment(Alignment.LAWFUL_GOOD);
-
-        npcRepo.save(new_major_npc);
-
-        return "Created Major NPC";
-    }
 }
