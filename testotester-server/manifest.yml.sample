@@ -6,8 +6,8 @@ applications:
     buildpacks: [java_buildpack_offline]
     path: target/testotester-server-0.0.1-SNAPSHOT.jar
     env:
-      LOGGING_LEVEL_ROOT: INFO
+      LOGGING_LEVEL_ROOT: <LOGGING-LEVEL>
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
       JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
-      JAVA_OPTS: -Dspring.profiles.active=in-memory
-      CLIENT_URL:
+      JAVA_OPTS: -Dspring.profiles.active=<PROFILE>
+      CLIENT_URL: <CLIENT-URL>
