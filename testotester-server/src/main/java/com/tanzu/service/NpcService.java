@@ -26,8 +26,6 @@ public class NpcService {
     public String createMajorNpc(String first_name, String last_name, String gender, String race, String profession)
     {
         MajorNpc new_major_npc = new MajorNpc(first_name, last_name, gender, race, profession);
-        new_major_npc.show();
-        new_major_npc.setAlignment(Alignment.LAWFUL_GOOD);
 
         npcRepo.save(new_major_npc);
 
