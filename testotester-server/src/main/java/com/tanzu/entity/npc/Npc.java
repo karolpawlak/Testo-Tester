@@ -17,7 +17,7 @@ public class Npc implements Dwarf, Elf, Gnome, Halfling, Human {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "NPC_ID")
+    @Column(name = "NPC_ID", unique = true, nullable = false)
     protected Long npcID;
     protected String first_name;
     protected String last_name;

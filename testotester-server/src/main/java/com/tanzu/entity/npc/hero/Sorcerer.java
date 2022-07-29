@@ -1,4 +1,4 @@
-package com.tanzu.entity.character;
+package com.tanzu.entity.npc.hero;
 
 import com.tanzu.entity.npc.MajorNpc;
 

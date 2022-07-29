@@ -1,16 +1,12 @@
 package com.tanzu.service;
 
-import com.tanzu.entity.Alignment;
 import com.tanzu.entity.Mode;
 import com.tanzu.entity.Status;
-import com.tanzu.entity.npc.MajorNpc;
-import com.tanzu.entity.npc.Npc;
-import com.tanzu.factory.MonsterFactory;
-import com.tanzu.repository.NpcRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,7 +26,7 @@ public class ServerService {
     @Value("${CLIENT_URL:http://localhost:8081}")
     private String clientUrl;
 
-    public Status check()
+    public ResponseEntity<Status> check()
     {
         // put server status data
         status.setServerMode(Mode.ONLINE);
@@ -51,7 +47,7 @@ public class ServerService {
         log.info("Check completed with the result - Profile: " + status.getActiveProfile()[0]
                 + " Server mode: " + status.getServerMode().toString() + " Client mode: " + status.getClientMode().toString());
 
-        return status;
+        return ResponseEntity.ok(status);
     }
 
     public Mode checkClient()

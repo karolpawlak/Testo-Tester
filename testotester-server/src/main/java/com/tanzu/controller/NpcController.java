@@ -1,24 +1,36 @@
 package com.tanzu.controller;
 
+import com.tanzu.entity.npc.Npc;
 import com.tanzu.service.NpcService;
-import com.tanzu.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/npc")
 public class NpcController {
 
     @Autowired
     NpcService service;
 
-    @GetMapping("/generate-npc")
-    public String generateNpc(){
+    @GetMapping("/{npc_id}")
+    public ResponseEntity<EntityModel<Npc>> single(@PathVariable Long npc_id) {
+        return service.getNpc(npc_id);
+    }
+
+    @PostMapping("/generate-basic")
+    public ResponseEntity<EntityModel<Npc>> generateNpc(){
         return service.createNpc("Toblen", "Stonehill", "Male", "Human", "Merchant");
     }
 
-    @GetMapping("/generate-major-npc")
-    public String generateMajorNpc(){
-        return service.createMajorNpc("Brolly", "Mountainheim", "Male", "Dwarf", "Barbarian");
+    @PostMapping("/generate-major")
+    public ResponseEntity<EntityModel<Npc>> generateMajorNpc(){
+        return service.createMajorNpc("Zak", "Beshir", "Male", "Human", "Soldier");
+    }
+
+    @PostMapping("/generate-hero")
+    public ResponseEntity<?> generateHeroNpc(){
+        return service.createHeroNpc("Brolly", "Mountainheim", "Male", "Dwarf", "Barbarian");
     }
 }
