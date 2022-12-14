@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tt-backend-deployment
+  labels:
+    app: testotester
+    tier: backend
+    environment: dev
+  #namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testotester
+  template:
+    metadata:
+      name: tt-backend-pod
+      labels:
+        tier: backend
+    spec:
+      containers:
+      - image: karolpawlak/tt-server
+        name: tt-server-container
+      - image: karolpawlak/tt-client
+        name: tt-client-container

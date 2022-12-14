@@ -4,6 +4,7 @@ import com.tanzu.entity.Alignment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +45,8 @@ public class MajorNpc extends Npc {
     // Randomizer Class - ThreadLocalRandom has a Random instance per thread and safeguards against contention.
     static class RandomTools {
         public static int randomValue(int size) {
+            // Generate a random int value between 0 and size.
+            // Note that 0 is the inclusive lower limit and size is the exclusive upper limit.
             return ThreadLocalRandom.current().nextInt(0, size);
         }
 
@@ -90,7 +94,7 @@ public class MajorNpc extends Npc {
         int no_of_abilities = 6;
         int best_roll_sum = 0;
         int best_roll_pos = 0;
-        int[] ability_arr = new int[no_of_abilities];
+        int[] ability_arr;
         int[][] roll_arr = new int[no_of_rolls][no_of_abilities];
 
         // Perform a number of rolls of all the abilities and store in a two-dimensional array
@@ -112,8 +116,12 @@ public class MajorNpc extends Npc {
             roll_arr[i] = new_ability_arr;
         }
 
+        log.info("Generated ability result with the following result array: \n" + Arrays.deepToString(roll_arr));
+
         // Pick the ability array with highest values
         ability_arr = roll_arr[best_roll_pos];
+
+        log.info("Selected the best roll array and assigning the following abilities to the NPC: \n" + Arrays.toString(roll_arr[best_roll_pos]));
 
         return ability_arr;
     }
@@ -130,6 +138,17 @@ public class MajorNpc extends Npc {
 
     public void addEquipment(String item){
         equipment.add(item);
+    }
+
+    @Override
+    public String toString(){
+        return "First name: " + this.first_name +
+                "\nLast name: " + this.last_name +
+                "\nGender: " + this.gender +
+                "\nRace: " + this.race +
+                "\nProfession: " + this.profession +
+                "\nStrength: " + strength + ", Dexterity: " + dexterity + ", Constitution: " + constitution + ", Intelligence: " + intelligence + ", Wisdom: " + wisdom + ", Charisma: " + charisma +
+                "\nAlignment: " + alignment;
     }
 }
 

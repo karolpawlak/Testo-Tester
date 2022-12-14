@@ -12,15 +12,36 @@ In order to deploy the app in the cloud, the code must be compiled and packaged 
 ```
 ./mvnw clean package
 ```
-This will add the JAR file to the **target** folder, which can then be used to create a container or directly push it to Cloud Foundry. The `clean` option will delete the previously created **target** folder.
 
 You can also compile and package the code, and also put it in your local repository so that other projects can refer to it. This can be done using the following command which will place all the needed components (dependencies) in a directory called **.m2** uder the user's folder.
 ```
 ./mvnw clean install
 ```
+
+This will add the JAR file to the **target** folder, which can then be used to create a container or directly push it to Cloud Foundry. The `clean` option will delete the previously created **target** folder. The applications that have their Maven plugin configured in their pom file, have layers enabled and as a result, enforcing the creation of a layered JAR file. With layered JARs, the structure looks similar to a typical Spring Boot fat JAR which is composed of 3 main areas - bootstrap classes required to launch the Spring app, application code and 3rd party libraries. However, this time we get a new layers.idx file that maps each directory in the fat JAR to a layer.
+
+The goal is to place application code and third-party libraries into layers that reflect how often they change. With this configuration, the Maven package command (along with any of its dependent commands) will generate a new layered JAR using the four default layers
+
+- "dependencies":
+  - "BOOT-INF/lib/"
+- "spring-boot-loader":
+  - "org/"
+- "snapshot-dependencies":
+- "application":
+  - "BOOT-INF/classes/"
+  - "BOOT-INF/classpath.idx"
+  - "BOOT-INF/layers.idx"
+  - "META-INF/"
+
+This can be observed when examining the JAR file itself and running the command from within the **target** folder `java -Djarmode=layertools -jar testotester-server-0.0.1-SNAPSHOT.jar list`
+
+
 More information on Maven's application build lifecycle [here](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html).
 
 Note. If you have Maven CLI installed on your local machine, the `./mvnw` can be substituted for `mvn`.
+
+## Creating an image
+Each application has multiple versions of the Dockerfiles which are used to create images. The **Dockerfile** has basic configuration for an image with a `WORKDIR` and `VOLUME`. The **Dockerfile.Layered** extracts the layers from our fat JAR, then copies each layer into the Docker image. Each COPY directive results in a new layer in the final Docker image thus creating a more tailored Docker image.
 
 ## Cloud Foundry deployment
 Prerequisites:

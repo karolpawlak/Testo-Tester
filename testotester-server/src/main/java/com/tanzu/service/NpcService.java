@@ -5,12 +5,14 @@ import com.tanzu.entity.npc.MajorNpc;
 import com.tanzu.entity.npc.Npc;
 import com.tanzu.handlers.NpcNotFoundException;
 import com.tanzu.repository.NpcRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class NpcService {
 
@@ -25,6 +27,8 @@ public class NpcService {
         Npc new_npc = new Npc(first_name, last_name, gender, race, profession);
         npcRepo.save(new_npc);
 
+        log.info("Basic NPC created with the following details: \n" + new_npc);
+
         return ResponseEntity
                 .created(npcAssembler.toURI(new_npc))
                 .body(npcAssembler.toModel(new_npc));
@@ -34,6 +38,8 @@ public class NpcService {
     {
         MajorNpc new_major_npc = new MajorNpc(first_name, last_name, gender, race, profession);
         npcRepo.save(new_major_npc);
+
+        log.info("Major NPC created with the following details: \n" + new_major_npc);
 
         return ResponseEntity
                 .created(npcAssembler.toURI(new_major_npc))
@@ -47,6 +53,9 @@ public class NpcService {
     }
 
     public ResponseEntity<?> createHeroNpc(String first_name, String last_name, String gender, String race, String profession) {
+
+        log.info("Hero NPC created with the following details: \n" + first_name);
+
         return ResponseEntity.noContent().build();
     }
 }
