@@ -20,6 +20,7 @@
 		<scs-starters.version>3.5.2</scs-starters.version>
 		<java-cfenv.version>2.4.1</java-cfenv.version>
 		<java-mysql-connector.version>8.0.29</java-mysql-connector.version>
+		<spring-security.version>6.0.1</spring-security.version>
 	</properties>
 
 	<dependencies>
@@ -95,6 +96,14 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${java-mysql-connector.version}</version>
 			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Security -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
 		</dependency>
 	</dependencies>
 	

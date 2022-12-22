@@ -9,4 +9,5 @@ public class Status {
     private String[] activeProfile;
     private Mode serverMode = Mode.UNKNOWN;
     private Mode clientMode = Mode.UNKNOWN;
+    private Mode configServerMode = Mode.UNKNOWN;
 }
