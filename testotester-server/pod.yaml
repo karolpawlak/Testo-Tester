@@ -9,6 +9,29 @@ metadata:
   #namespace: dev
 spec:
   containers:
-  - image: karolpawlak/tt-server
-    name: tt-server-container
-  restartPolicy: Never
+  - name: tt-server-container
+    image: karolpawlak/tt-server
+    ports:
+    - containerPort: 8080
+    env:
+    - name: LOGGING_LEVEL_ROOT
+      value: INFO
+    - name: JAVA_OPTS
+      value: -Dspring.profiles.active=in-memory
+    - name: CLIENT_URL
+      value: https://tt-client.cfapps-09.slot-34.tanzu-gss-labs.vmware.com
+    #- name: CLIENT_URL
+    #  valueFrom:
+    #    configMapKeyRef:              <--- ConfigMap example
+    #      name: tt-config-map
+    #      key: CLIENT_URL
+    #- name: CLIENT_URL
+    #  valueFrom:
+    #    secretKeyRef: tt-app-secret   <--- Secrets example
+    #envFrom:
+    #  - configMapRef:
+    #      name: tt-app-config         <--- define all of the ConfigMap's data
+    #envFrom:
+    #  - secretRef:
+    #      name: tt-app-secret         <--- define all of the Secret's data
+  restartPolicy: Never 
